@@ -1,6 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "recipe-sharing-app",
+  "name": "my-company",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,7 +12,7 @@
   "dependencies": {
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "zustand": "^5.0.10"
+    "react-router-dom": "^7.12.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
@@ -25,9 +24,5 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "vite": "^7.2.4"
-=======
-  "dependencies": {
-    "react-router-dom": "^7.12.0"
->>>>>>> 6912b05a7763417d49ab82e662a8eadda7a4bc6e
   }
 }
