@@ -83,7 +83,7 @@ export const fetchAdvancedUserData = async ({ username, location, minRepos }) =>
       query += `+repos:>=${minRepos}`;
     }
     
-    const response = await githubAPI.get(`/search/users?q=${query}`);
+    const response = await githubAPI.get(`https://api.github.com/search/users?q=${query}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching advanced user data:', error);
