@@ -43,4 +43,19 @@ export const getUserDetails = async (username) => {
   }
 };
 
+/**
+ * Fetch user data from GitHub API
+ * @param {string} username - The username to fetch
+ * @returns {Promise} - Promise with user data
+ */
+export const fetchUserData = async (username) => {
+  try {
+    const response = await githubAPI.get(`/users/${username}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw error;
+  }
+};
+
 export default githubAPI;
