@@ -58,4 +58,37 @@ export const fetchUserData = async (username) => {
   }
 };
 
+/**
+ * Advanced search for GitHub users with multiple criteria
+ * @param {Object} params - Search parameters
+ * @param {string} params.username - Username to search for
+ * @param {string} params.location - Location filter
+ * @param {number} params.minRepos - Minimum number of repositories
+ * @returns {Promise} - Promise with search results
+ */
+export const fetchAdvancedUserData = async ({ username, location, minRepos }) => {
+  try {
+    // Build query string with multiple parameters
+    let query = '';
+    
+    if (username) {
+      query += username;
+    }
+    
+    if (location) {
+      query += `+location:${location}`;
+    }
+    
+    if (minRepos) {
+      query += `+repos:>=${minRepos}`;
+    }
+    
+    const response = await githubAPI.get(`/search/users?q=${query}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching advanced user data:', error);
+    throw error;
+  }
+};
+
 export default githubAPI;
