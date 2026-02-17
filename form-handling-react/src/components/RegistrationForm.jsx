@@ -1,35 +1,25 @@
 import { useState } from 'react';
 
 function RegistrationForm() {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
-
   const validate = () => {
     const newErrors = {};
-    if (!formData.username.trim()) {
+    if (!username.trim()) {
       newErrors.username = 'Username is required';
     }
-    if (!formData.email.trim()) {
+    if (!email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = 'Please enter a valid email';
     }
-    if (!formData.password.trim()) {
+    if (!password.trim()) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
+    } else if (password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
     setErrors(newErrors);
@@ -39,7 +29,7 @@ function RegistrationForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', { username, email, password });
       setSubmitted(true);
     }
   };
@@ -49,9 +39,9 @@ function RegistrationForm() {
       <div className="text-center py-8">
         <div className="text-5xl mb-4">🎉</div>
         <h2 className="text-2xl font-bold text-green-600 mb-2">Registration Successful!</h2>
-        <p className="text-gray-600 mb-6">Welcome, {formData.username}!</p>
+        <p className="text-gray-600 mb-6">Welcome, {username}!</p>
         <button
-          onClick={() => { setSubmitted(false); setFormData({ username: '', email: '', password: '' }); }}
+          onClick={() => { setSubmitted(false); setUsername(''); setEmail(''); setPassword(''); }}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
         >
           Register Another User
@@ -70,8 +60,8 @@ function RegistrationForm() {
           type="text"
           id="username"
           name="username"
-          value={formData.username}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.username ? 'border-red-500' : 'border-gray-300'
           }`}
@@ -88,8 +78,8 @@ function RegistrationForm() {
           type="email"
           id="email"
           name="email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.email ? 'border-red-500' : 'border-gray-300'
           }`}
@@ -106,8 +96,8 @@ function RegistrationForm() {
           type="password"
           id="password"
           name="password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
             errors.password ? 'border-red-500' : 'border-gray-300'
           }`}
