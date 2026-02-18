@@ -14,8 +14,10 @@ function PostsComponent() {
   const { data, isLoading, isError, error, refetch, isFetching } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
-    staleTime: 60000, // Data stays fresh for 60 seconds
-    cacheTime: 300000, // Cache data for 5 minutes
+    staleTime: 60000,
+    cacheTime: 300000,
+    refetchOnWindowFocus: false,
+    keepPreviousData: true,
   });
 
   if (isLoading) {
@@ -46,7 +48,6 @@ function PostsComponent() {
 
   return (
     <div>
-      {/* Header with Refetch Button */}
       <div className="flex justify-between items-center mb-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Posts</h2>
@@ -75,7 +76,6 @@ function PostsComponent() {
         </button>
       </div>
 
-      {/* Posts Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data?.map((post) => (
           <div
