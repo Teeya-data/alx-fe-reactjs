@@ -42,9 +42,16 @@ function TodoList() {
               textDecoration: todo.completed ? 'line-through' : 'none',
               cursor: 'pointer',
             }}
+            data-testid={`todo-${todo.id}`}
           >
             {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+            <button 
+              onClick={(e) => { 
+                e.stopPropagation(); 
+                deleteTodo(todo.id); 
+              }}
+              aria-label={`Delete ${todo.text}`}
+            >
               Delete
             </button>
           </li>
@@ -70,6 +77,7 @@ function AddTodoForm({ onAdd }) {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Add a new todo"
+        aria-label="Add a new todo"
       />
       <button type="submit">Add Todo</button>
     </form>
